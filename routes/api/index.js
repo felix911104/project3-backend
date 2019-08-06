@@ -1,5 +1,6 @@
 //creating user table with name and password
 var db = require("../../models")
+const axios = require("axios");
 
 module.exports = function(app) {
 
@@ -9,6 +10,16 @@ module.exports = function(app) {
         res.json(result)
       })
     })
+
+    app.get("/api/food", function(req, res) {
+  axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
+  then(result=>{
+ 
+    
+    res.json({"data":result.data})
+    
+  })
+})
     //   user.findOne({where:{name:req.body.name}}).then(dbUser=>{
     //     let loggedIn = bcrypt.compareSync(req.body.password,dbUser.password);
     //     if(loggedIn) {

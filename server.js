@@ -1,25 +1,37 @@
-const express = require("express");
+// ******************************************************************************
+// *** Dependencies
+// =============================================================
 const path = require('path');
 const mysql = require('mysql');
 const axios = require("axios");
-const bcrypt = require('bcrypt');
-const routes = require("./routes");
 const cors = require("cors");
-// const saltRounds = 10;
+var express = require("express");
 
-const app = express();
-const PORT = process.env.PORT || 8080;
+
+// Sets up the Express App
+// =============================================================
+var app = express();
+var PORT = process.env.PORT || 8080;
+
+// Requiring our models for syncing
+var db = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 
 // Static directory
 app.use(express.static("public"));
 
-//mysql models
-// var db = require("./models");
+// Routes
+// =============================================================
+require("./routes/api")(app);
+//new comment
 
-
-app.listen(8000, () => console.log(`Listening on port ${PORT}`));
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+db.sequelize.sync({ force: true }).then(function () {
+    app.listen(PORT, function () {
+        console.log("App listening on PORT " + PORT);
+    });
+});

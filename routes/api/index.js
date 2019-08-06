@@ -1,8 +1,22 @@
 //creating user table with name and password
 var db = require("../../models")
 const bcrypt = require('bcrypt');
+const axios = require("axios");
 
 module.exports = function (app) {
+
+
+
+    app.get("/api/food", function(req, res) {
+  axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
+  then(result=>{
+ 
+    
+    res.json({"data":result.data})
+    
+  })
+})
+ 
 
 //route to get all users in db
 // app.get("/", function(req, res) {

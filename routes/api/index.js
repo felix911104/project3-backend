@@ -7,23 +7,20 @@ module.exports = function (app) {
 
 
 
-    app.get("/api/food", function(req, res) {
-  axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
-  then(result=>{
- 
-    
-    res.json({"data":result.data})
-    
+  app.get("/api/food", function (req, res) {
+    axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
+      then(result => {
+        res.json({ "data": result.data })
+      })
   })
-})
- 
 
-//route to get all users in db
-// app.get("/", function(req, res) {
-//   db.User.findAll({}).then(result => {
-//     res.send(result)
-//   })
-// })
+
+  //route to get all users in db
+  // app.get("/", function(req, res) {
+  //   db.User.findAll({}).then(result => {
+  //     res.send(result)
+  //   })
+  // })
 
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {
@@ -37,14 +34,14 @@ module.exports = function (app) {
       let loggedIn = bcrypt.compareSync(req.params.password, dbUser.password);
       if (loggedIn) {
 
-        res.send({ "success": "Welcome" })
+        res.send({ "success": true })
       }
       else {
         res.send({ "success": "Invalid Password" })
       }
     }).catch((error) => {
       //console.log(error);
-      res.send({ "err": "Please Signup!" })
+      res.send({ "success": false })
     });
   });
 
@@ -52,14 +49,19 @@ module.exports = function (app) {
   app.post('/api/users', function (req, res) {
     console.log(req.body)
     //find or create new user
-    db.User.findOrCreate({ where: {name: req.body.name}, defaults: {password: req.body.password} }).then(([user, created]) => {
-       console.log(user.get({
-       plain: true
+    db.User.findOrCreate({ where: { name: req.body.name }, defaults: { password: req.body.password } }).then(([user, created]) => {
+      console.log(user.get({
+        plain: true
       }))
-       console.log(created)
-     }).catch((error) => {
-        console.log(error)
-     });
-    res.send({ "success": "Welcome to our app!" })
+      console.log(created)
+      if(!created) {
+        res.send({"success": false})
+      }
+      else {
+        res.send({ "success": true })
+      }
+    }).catch((error) => {
+      console.log(error)
+    });
   });
 }

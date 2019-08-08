@@ -45,6 +45,18 @@ module.exports = function (app) {
     })
   });
 
+  app.get("/api/food", function (req, res) {
+    axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
+      then(result => {
+        res.json({ "data": result.data })
+      })
+  })
+
+  app.get("/api/clinic", function(req, res) {
+    db.Clinic.findAll({}).then(result => {
+      res.send(result);
+    })
+  })
   app.get("/api/userfood/:id", function (req, res) {
     // db.FoodUsers.findAll({where:{userId:req.params.id}})
     //   .then(function (result) {
@@ -77,14 +89,14 @@ module.exports = function (app) {
       let loggedIn = bcrypt.compareSync(req.params.password, dbUser.password);
       if (loggedIn) {
 
-        res.send({ "success": "Welcome" })
+        res.send({ "success": true })
       }
       else {
         res.send({ "success": "Invalid Password" })
       }
     }).catch((error) => {
       //console.log(error);
-      res.send({ "err": "Please Signup!" })
+      res.send({ "success": false })
     });
   });
 
@@ -97,9 +109,14 @@ module.exports = function (app) {
         plain: true
       }))
       console.log(created)
+      if(!created) {
+        res.send({"success": false})
+      }
+      else {
+        res.send({ "success": true })
+      }
     }).catch((error) => {
       console.log(error)
     });
-    res.send({ "success": "Welcome to our app!" })
   });
 }

@@ -6,24 +6,64 @@ const axios = require("axios");
 module.exports = function (app) {
 
 
+  app.get("/api/users", function (req, res) {
+    db.User.findAll({})
+      .then(function (result) {
+        res.json(result)
+      })
+  });
 
-    app.get("/api/food", function(req, res) {
-  axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
-  then(result=>{
- 
-    
-    res.json({"data":result.data})
-    
+  app.get("/api/food", function (req, res) {
+    axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
+      then(result => {
+        res.json({ "data": result.data })
+      })
+  });
+
+  app.post("/api/fooddatabase", function (req, res) {
+    db.Food.create(req.body.foodData).then(function (food) {
+      res.send('data added');
+    })
+  });
+
+  app.get("/api/foodindatabase/:location", function (req, res) {
+    // console.log(req.body.data)
+    db.Food.findOne({ where: { location: req.params.location } }).then(function (food) {
+      res.json(food)
+    })
+  });
+
+  app.post("/api/foodtouser", function (req, res) {
+    db.Food.findOne({ where: { location: req.body.foodData.location } }).then(function (food) {
+      // console.log(req.body.userId)
+      db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+        // console.log('adding foodz')
+        console.log("food to user")
+        user.addFood(food);
+        res.send('data added');
+      })
+    })
+  });
+
+  app.get("/api/userfood/:id", function (req, res) {
+    // db.FoodUsers.findAll({where:{userId:req.params.id}})
+    //   .then(function (result) {
+    //     res.json(result)
+    //   })
+    db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
+      user.getFood({}).then(food => {
+        res.json(food)
+      })
+    })
   })
-})
- 
 
-//route to get all users in db
-// app.get("/", function(req, res) {
-//   db.User.findAll({}).then(result => {
-//     res.send(result)
-//   })
-// })
+
+  //route to get all users in db
+  // app.get("/", function(req, res) {
+  //   db.User.findAll({}).then(result => {
+  //     res.send(result)
+  //   })
+  // })
 
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {
@@ -52,14 +92,14 @@ module.exports = function (app) {
   app.post('/api/users', function (req, res) {
     console.log(req.body)
     //find or create new user
-    db.User.findOrCreate({ where: {name: req.body.name}, defaults: {password: req.body.password} }).then(([user, created]) => {
-       console.log(user.get({
-       plain: true
+    db.User.findOrCreate({ where: { name: req.body.name }, defaults: { password: req.body.password } }).then(([user, created]) => {
+      console.log(user.get({
+        plain: true
       }))
-       console.log(created)
-     }).catch((error) => {
-        console.log(error)
-     });
+      console.log(created)
+    }).catch((error) => {
+      console.log(error)
+    });
     res.send({ "success": "Welcome to our app!" })
   });
 }

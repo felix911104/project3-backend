@@ -1,5 +1,6 @@
 //creating user table with name and password
 var db = require("../../models")
+const bcrypt = require('bcrypt');
 const axios = require("axios");
 
 module.exports = function (app) {
@@ -21,26 +22,26 @@ module.exports = function (app) {
 
   app.post("/api/fooddatabase", function (req, res) {
     db.Food.create(req.body.foodData).then(function (food) {
-   res.send('data added');
+      res.send('data added');
     })
   });
 
-  app.get("/api/foodindatabase/:location", function(req,res){
+  app.get("/api/foodindatabase/:location", function (req, res) {
     // console.log(req.body.data)
-    db.Food.findOne({where:{location:req.params.location}}).then(function(food){
+    db.Food.findOne({ where: { location: req.params.location } }).then(function (food) {
       res.json(food)
     })
   });
 
   app.post("/api/foodtouser", function (req, res) {
-    db.Food.findOne({where:{location:req.body.foodData.location}}).then(function (food) {
+    db.Food.findOne({ where: { location: req.body.foodData.location } }).then(function (food) {
       // console.log(req.body.userId)
-      db.User.findOne({where:{id:req.body.userId}}).then(function(user){
-          // console.log('adding foodz')
-         console.log("food to user")
-          user.addFood(food);
-          res.send('data added');
-        })
+      db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+        // console.log('adding foodz')
+        console.log("food to user")
+        user.addFood(food);
+        res.send('data added');
+      })
     })
   });
 
@@ -49,48 +50,56 @@ module.exports = function (app) {
     //   .then(function (result) {
     //     res.json(result)
     //   })
-    db.User.findOne({where:{id:req.params.id}}).then(function(user){
-user.getFood({}).then(food=>{
-  res.json(food)
-})
-})
-      // fetchMe(req, res) {
-      //   const username = req.decoded.data;
-      //   return 
-        // db.User
-        // .find({
-        //   include: [{
-        //     model: models.Food,
-        //     as: 'food',
-        //     required: false,
-        //     attributes: ['day_time', 'meal_served'],
-        //     through: { attributes: [] }
-        //   }],
-        //   where: { id:req.params.id }
-        // })
-  });
-  //   user.findOne({where:{name:req.body.name}}).then(dbUser=>{
-  //     let loggedIn = bcrypt.compareSync(req.body.password,dbUser.password);
-  //     if(loggedIn) {
-  //         req.session.user = dbUser
-  //     }
-  //     else {
-  //         req.session.error = 'auth failed bro'
-  //     }
-  //     res.send(req.session);
+    db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
+      user.getFood({}).then(food => {
+        res.json(food)
+      })
+    })
+  })
 
 
-
-
+  //route to get all users in db
+  // app.get("/", function(req, res) {
+  //   db.User.findAll({}).then(result => {
+  //     res.send(result)
+  //   })
   // })
 
+  //login for existing user
+  app.get("/api/users/:name/:password", function (req, res) {
 
-  app.post('/api/users', function (req, res) {
-    console.log(req.body);
-    // res.json(req.body);
-    db.User.create(req.body)
-      .then(user => res.json(user))
+    console.log(req.params.password);
+    console.log(req.params.name);
+    //find user in db
+    db.User.findOne({ where: { name: req.params.name } }).then(dbUser => {
+      console.log(dbUser);
+      //comparing hashed password
+      let loggedIn = bcrypt.compareSync(req.params.password, dbUser.password);
+      if (loggedIn) {
+
+        res.send({ "success": "Welcome" })
+      }
+      else {
+        res.send({ "success": "Invalid Password" })
+      }
+    }).catch((error) => {
+      //console.log(error);
+      res.send({ "err": "Please Signup!" })
+    });
   });
 
-
+  //sign up for new user
+  app.post('/api/users', function (req, res) {
+    console.log(req.body)
+    //find or create new user
+    db.User.findOrCreate({ where: { name: req.body.name }, defaults: { password: req.body.password } }).then(([user, created]) => {
+      console.log(user.get({
+        plain: true
+      }))
+      console.log(created)
+    }).catch((error) => {
+      console.log(error)
+    });
+    res.send({ "success": "Welcome to our app!" })
+  });
 }

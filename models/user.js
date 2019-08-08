@@ -20,6 +20,15 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     });
+
+ User.associate = (models) => {
+    User.belongsToMany(models.Food, {
+      through: 'FoodUsers',
+      as: 'food',
+      foreignKey: 'userId'
+    });
+  };
+
     User.beforeCreate(function(user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
       });

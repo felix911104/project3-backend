@@ -14,6 +14,11 @@ module.exports = function (app) {
       })
   })
 
+  app.get("/api/clinic", function(req, res) {
+    db.Clinic.findAll({}).then(result => {
+      res.send(result);
+    })
+  })
 
   //route to get all users in db
   // app.get("/", function(req, res) {

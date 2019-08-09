@@ -72,12 +72,13 @@ module.exports = function (app) {
         })
       })
     })
-    //grab clinic database
-    app.get("/api/clinic", function(req, res) {
-      db.Clinic.findAll({}).then(result => {
-        res.send(result);
-      })
-    })
+
+
+
+
+
+
+
 
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {

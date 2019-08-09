@@ -18,9 +18,10 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "JawsDB",
+    "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "use_env_variable":"JAWSDB_URL"
   }
 }

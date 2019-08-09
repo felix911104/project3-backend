@@ -61,23 +61,23 @@ module.exports = function (app) {
   })
 
 
-  app.get("/api/clinic", function(req, res) {
-    db.Clinic.findAll({}).then(result => {
-      res.send(result);
-    })
-  })
   app.get("/api/userfood/:id", function (req, res) {
     // db.FoodUsers.findAll({where:{userId:req.params.id}})
     //   .then(function (result) {
-    //     res.json(result)
-    //   })
-    db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
-      user.getFood({}).then(food => {
-        res.json(food)
+      //     res.json(result)
+      //   })
+      db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
+        user.getFood({}).then(food => {
+          res.json(food)
+        })
       })
     })
-  })
-
+    //grab clinic database
+    app.get("/api/clinic", function(req, res) {
+      db.Clinic.findAll({}).then(result => {
+        res.send(result);
+      })
+    })
 
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {

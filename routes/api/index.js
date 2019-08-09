@@ -69,14 +69,6 @@ module.exports = function (app) {
     })
   })
 
-
-  //route to get all users in db
-  // app.get("/", function(req, res) {
-  //   db.User.findAll({}).then(result => {
-  //     res.send(result)
-  //   })
-  // })
-
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {
 

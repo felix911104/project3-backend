@@ -5,9 +5,17 @@ const axios = require("axios");
 
 module.exports = function (app) {
 
+  app.delete("/api/deletefood/:userid/:foodid",function(req,res){
+    console.log("hit hereeee")
+    db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
+      user.removeFood(req.params.foodid).then(food => {
+        res.json(food)
+      })
+    })
+  })
 
-  app.get("/api/users", function (req, res) {
-    db.User.findAll({})
+  app.get("/api/userbyname/:name", function (req, res) {
+    db.User.findOne({where:{name:req.params.name}})
       .then(function (result) {
         res.json(result)
       })
@@ -52,6 +60,7 @@ module.exports = function (app) {
       })
   })
 
+
   app.get("/api/clinic", function(req, res) {
     db.Clinic.findAll({}).then(result => {
       res.send(result);
@@ -70,21 +79,15 @@ module.exports = function (app) {
   })
 
 
-  //route to get all users in db
-  // app.get("/", function(req, res) {
-  //   db.User.findAll({}).then(result => {
-  //     res.send(result)
-  //   })
-  // })
-
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {
 
-    console.log(req.params.password);
-    console.log(req.params.name);
+    // console.log(req.params.password);
+    // console.log(req.params.name);
     //find user in db
     db.User.findOne({ where: { name: req.params.name } }).then(dbUser => {
-      console.log(dbUser);
+     
+  
       //comparing hashed password
       let loggedIn = bcrypt.compareSync(req.params.password, dbUser.password);
       if (loggedIn) {

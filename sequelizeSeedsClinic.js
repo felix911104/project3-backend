@@ -65,4 +65,38 @@ db.Clinic.create({
     Notes:"",
     Link: "https://www.kingcounty.gov/depts/health/locations/north/dental-clinic.aspx"
 });
+db.Clinic.create({
+    Name: "Neighborcare Health 45th Street MEDICAL",
+    Location: "1629 North 45th Street Seattle, WA 98103",
+    DaysOfOperation: "Monday, Tuesday 8:00 am - 7:00 pm Wednesday varies, Thursday, Friday 8:00 am - 5:30 pm Saturday 9:00 am - 3:00 pm",
+    PhoneNumber: "206-633-3113",
+    ClientsServed: "Low-income, homeless, all ages",
+    Services: "Preventive Care, Illnesses & Injuries, Ongoing Conditions, Well-child Care, Pediatrics, Family Planning, Family Medicine, Pregnancy Care, Newborn Care, Vaccinations, Nutrition, Counseling, STI/HIV, CareLab, Referrals, Pharmacy, Trans",
+    Notes:"Please schedule an appointment ahead of time and arrive 15 minutes early",
+    Link: "https://neighborcare.org/clinics/45th-street/"
+});
+db.Clinic.create({
+    Name: "Neighborcare Health 45th Street DENTAL CLINIC",
+    Location: "1629 North 45th Street Seattle, WA 98103",
+    DaysOfOperation: "Monday - Tuesday 7:00 am - 5:30 pm Saturday 9:00 am - 2:00 pm",
+    PhoneNumber: "206-548-2964",
+    ClientsServed: "Low-income, homeless, all ages",
+    Services: "Cleanings, Fillings, X-rays, Specialty Dental Care, Specialist Referrals, Emergency Dental Care",
+    Notes:"",
+    Link: "https://neighborcare.org/clinics/45th-street/"
+});
+db.Clinic.create({
+    Name: "Neighborcare Health 45th Street PHARMACY",
+    Location: "1629 North 45th Street Seattle, WA 98103",
+    DaysOfOperation: "Monday - Friday 9:00 am - 5:30 pm",
+    PhoneNumber: "206-633-3365",
+    ClientsServed: "Low-income, homeless, all ages",
+    Services: "Medication fills",
+    Notes:"",
+    Link: "https://neighborcare.org/clinics/45th-street/"
+});
+
+
+
+
 

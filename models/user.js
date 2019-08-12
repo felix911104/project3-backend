@@ -29,6 +29,15 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
+   User.associate = (models) => {
+    User.belongsToMany(models.Shelter, {
+      through: 'ShelterUsers',
+      as: 'shelter',
+      foreignKey: 'userId'
+    });
+  };
+
+
     User.beforeCreate(function(user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
       });

@@ -138,6 +138,18 @@ module.exports = function (app) {
     })
   });
 
+  app.post("/api/Shelterstouser", function (req, res) {
+    db.Shelter.findOne({ where: { Location: req.body.shelterData.Location } }).then(function (shelter) {
+      // console.log(req.body.userId)
+      db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+        // console.log('adding foodz')
+        console.log("food to user")
+        user.addShelter(shelter);
+        res.send('data added');
+      })
+    })
+  });
+
   
 
 }

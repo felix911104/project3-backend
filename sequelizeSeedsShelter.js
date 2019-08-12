@@ -44,5 +44,57 @@ db.Shelter.create({
     Link: "https://www.ugm.org/what-we-do/welcome-and-embrace/mens-shelter/"
 });
 
+db.Shelter.create({
+    Name: "Bread of Life. The Mission in Pioneer Square",
+    Location: "97 S. MAIN STREET, SEATTLE, WA 98104",
+    DaysOfOperation: "All days of the week",
+    PhoneNumber: "206-682-3579",
+    ClientsServed: "Day Shelter Open to All, Night Shelter Available for Adult Men",
+    Services: "Lockers, showers and bus tickets, help with clothing needs and a quiet place to relax and rest.",
+    Notes: "Visit link or call to get more information",
+    Link: "https://www.breadoflifemission.org/"
+});
 
+db.Shelter.create({
+    Name: "Angeline's Day Center",
+    Location: "2030 3rd Avenue Seattle, WA 98121",
+    DaysOfOperation: "All days of the week. 8AM - 8PM.",
+    PhoneNumber: "206.436.8650",
+    ClientsServed: "Adult Women. Overnight winter shelter is open to single adult women 18 and older.",
+    Services: "Transitional Housing, Rental/Utility Assistance, Permanent Housing, Emergency Shelter, Homeless Services, Childcare",
+    Notes: "Visit link or call to get more information",
+    Link: "https://www.ywcaworks.org/programs/angelines-day-center"
+});
 
+db.Shelter.create({
+    Name: "Noel House Women's Referral Center",
+    Location: "2030 3rd Ave Seattle, WA 98101",
+    DaysOfOperation: "All days of the week. 6:00 – 9:00 p.m.",
+    PhoneNumber: "(206) 441-3210",
+    ClientsServed: "Women",
+    Services: "The Women's Referral Center refers 180 women nightly to 15 shelters in partnership with multiple service agencies. Evening meals and hygiene services are also available.",
+    Notes: "Visit link or call to get more information",
+    Link: "https://ccsww.org/get-help/shelter-homeless-services/noel-house-programs/"
+});
+
+db.Shelter.create({
+    Name: "Catholic Community Services - Solanus Casey Center",
+    Location: "906 Columbia Street Seattle, WA 98104",
+    DaysOfOperation: "Monday through Thursday, from 1:00 p.m. to 4:00 p.m.",
+    PhoneNumber: "206-223-0907",
+    ClientsServed: "All Age Groups",
+    Services: "Walk-in hospitality and referral center that provides services to the unemployed, working poor, those living on the street, shelters, and transitional housing.",
+    Notes: "Visit link or call to get more information",
+    Link: "http://ccsww.convio.net"
+});
+
+db.Shelter.create({
+    Name: "Family and Adult Service Center - Adult Center",
+    Location: "77 S Washington St. Seattle, WA 98104",
+    DaysOfOperation: "Monday through Thursday, from 1:00 p.m. to 4:00 p.m.",
+    PhoneNumber: "(206) 474-1000",
+    ClientsServed: "All Age Groups",
+    Services: "Showers - Food - Laundry facilties - Telephones - Mail services - Clothing ",
+    Notes: "Visit link or call to get more information",
+    Link: "http://www.compasshousingalliance.org"
+});

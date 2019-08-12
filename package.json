@@ -29,5 +29,6 @@
   "bugs": {
     "url": "https://github.com/felix911104/project3-backend/issues"
   },
-  "homepage": "https://github.com/felix911104/project3-backend#readme"
+  "homepage": "https://github.com/felix911104/project3-backend#readme",
+  "keywords": []
 }

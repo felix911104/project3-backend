@@ -36,6 +36,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
+Shelter.associate = (models) => {
+    Shelter.belongsToMany(models.User, {
+      through: 'ShelterUsers',
+      as: 'users',
+      foreignKey: 'shelterId'
+    });
+  };
     return Shelter;
   };
   

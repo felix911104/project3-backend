@@ -9,29 +9,29 @@ module.exports = function (app) {
     console.log("hit hereeee")
     db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
       user.removeFood(req.params.foodid).then(food => {
-        res.json(food)
-      })
-    })
-  })
+        res.json(food);
+      });
+    });
+  });
 
   app.get("/api/userbyname/:name", function (req, res) {
     db.User.findOne({where:{name:req.params.name}})
       .then(function (result) {
-        res.json(result)
-      })
+        res.json(result);
+      });
   });
 
   app.get("/api/food", function (req, res) {
     axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
       then(result => {
-        res.json({ "data": result.data })
-      })
+        res.json({ "data": result.data });
+      });
   });
 
   app.post("/api/fooddatabase", function (req, res) {
     db.Food.create(req.body.foodData).then(function (food) {
       res.send('data added');
-    })
+    });
   });
 
   app.get("/api/foodindatabase/:location", function (req, res) {
@@ -122,4 +122,22 @@ module.exports = function (app) {
       console.log(error)
     });
   });
+
+
+  app.get("/api/shelters", function (req, res) {
+    db.Shelter.findAll().
+      then(result => {
+        res.json(result);
+      });
+  });
+
+   app.get("/api/sheltersindatabase/:location", function (req, res) {
+    // console.log(req.body.data)
+    db.Shelter.findOne({ where: { location: req.params.location } }).then(function (shelter) {
+      res.json(shelter)
+    })
+  });
+
+  
+
 }

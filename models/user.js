@@ -27,15 +27,14 @@ module.exports = function(sequelize, DataTypes) {
       as: 'food',
       foreignKey: 'userId'
     });
-  };
-
-   User.associate = (models) => {
     User.belongsToMany(models.Shelter, {
       through: 'ShelterUsers',
       as: 'shelter',
       foreignKey: 'userId'
     });
   };
+
+ 
 
 
     User.beforeCreate(function(user) {

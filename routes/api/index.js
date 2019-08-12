@@ -5,6 +5,7 @@ const axios = require("axios");
 
 module.exports = function (app) {
 
+  //delete saved food
   app.delete("/api/deletefood/:userid/:foodid",function(req,res){
     console.log("hit hereeee")
     db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
@@ -14,33 +15,34 @@ module.exports = function (app) {
     });
   });
 
+//
   app.get("/api/userbyname/:name", function (req, res) {
     db.User.findOne({where:{name:req.params.name}})
       .then(function (result) {
         res.json(result);
       });
   });
-
+//call to city of seattle api
   app.get("/api/food", function (req, res) {
     axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
       then(result => {
         res.json({ "data": result.data });
       });
   });
-
+//saving food to database table
   app.post("/api/fooddatabase", function (req, res) {
     db.Food.create(req.body.foodData).then(function (food) {
       res.send('data added');
     });
   });
-
+//check if food exists in database
   app.get("/api/foodindatabase/:location", function (req, res) {
     // console.log(req.body.data)
     db.Food.findOne({ where: { location: req.params.location } }).then(function (food) {
       res.json(food)
     })
   });
-
+//saving user preferences to databse
   app.post("/api/foodtouser", function (req, res) {
     db.Food.findOne({ where: { location: req.body.foodData.location } }).then(function (food) {
       // console.log(req.body.userId)
@@ -52,13 +54,6 @@ module.exports = function (app) {
       })
     })
   });
-
-  app.get("/api/food", function (req, res) {
-    axios.get("https://data.seattle.gov/resource/hmzu-x5ed.json").
-      then(result => {
-        res.json({ "data": result.data })
-      })
-  })
 
 
   app.get("/api/userfood/:id", function (req, res) {
@@ -72,13 +67,8 @@ module.exports = function (app) {
         })
       })
     })
-    //grab clinic database
-    app.get("/api/clinic", function(req, res) {
-      db.Clinic.findAll({}).then(result => {
-        res.send(result);
-      })
-    })
 
+ 
   //login for existing user
   app.get("/api/users/:name/:password", function (req, res) {
 
@@ -124,6 +114,30 @@ module.exports = function (app) {
   });
 
 
+  //finding all clinics
+  app.get("/api/clinics", function(req, res) {
+    db.Clinic.findAll({}).then(result => {
+      res.json(result);
+    })
+  });
+
+  // saving user preferences to databse
+  // app.post("/api/clinictouser", function (req, res) {
+  //   db.Clinic.findOne({ where: { location: req.body.clinicData.location } }).then(function (clinic) {
+  //     // console.log(req.body.userId)
+  //     db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+  //       // console.log('adding foodz')
+  //       console.log("clinic to user")
+  //       user.addClinic(clinic);
+  //       res.send('data added');
+  //     })
+  //   })
+  // });
+
+
+
+
+
   app.get("/api/shelters", function (req, res) {
     db.Shelter.findAll().
       then(result => {
@@ -131,10 +145,17 @@ module.exports = function (app) {
       });
   });
 
-   app.get("/api/sheltersindatabase/:location", function (req, res) {
-    // console.log(req.body.data)
-    db.Shelter.findOne({ where: { location: req.params.location } }).then(function (shelter) {
-      res.json(shelter)
+
+
+  app.post("/api/Shelterstouser", function (req, res) {
+    db.Shelter.findOne({ where: { Location: req.body.shelterData.Location } }).then(function (shelter) {
+      // console.log(req.body.userId)
+      db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+        // console.log('adding foodz')
+        console.log("food to user")
+        user.addShelter(shelter);
+        res.send('data added');
+      })
     })
   });
 

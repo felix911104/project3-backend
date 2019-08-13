@@ -158,7 +158,6 @@ module.exports = function (app) {
   });
 
 
-
   app.post("/api/Shelterstouser", function (req, res) {
     db.Shelter.findOne({ where: { Location: req.body.shelterData.Location } }).then(function (shelter) {
       // console.log(req.body.userId)

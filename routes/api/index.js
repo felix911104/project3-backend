@@ -7,7 +7,6 @@ module.exports = function (app) {
 
   //delete saved food
   app.delete("/api/deletefood/:userid/:foodid",function(req,res){
-    console.log("hit hereeee")
     db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
       user.removeFood(req.params.foodid).then(food => {
         res.json(food);
@@ -80,13 +79,9 @@ module.exports = function (app) {
   
       //comparing hashed password
       let loggedIn = bcrypt.compareSync(req.params.password, dbUser.password);
-      if (loggedIn) {
-
-        res.send({ "success": true })
-      }
-      else {
-        res.send({ "success": "Invalid Password" })
-      }
+      
+        res.send({ "success": loggedIn })
+    
     }).catch((error) => {
       //console.log(error);
       res.send({ "success": false })
@@ -121,6 +116,39 @@ module.exports = function (app) {
     })
   });
 
+  
+  app.post("/api/Clinicstouser", function (req, res) {
+    db.Clinic.findOne({ where: { Location: req.body.clinicData.Location } }).then(function (clinic) {
+  console.log(clinic)
+      db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+ 
+        user.addClinic(clinic);
+        res.send('data added');
+      })
+    })
+  });
+
+  app.get("/api/userClinics/:id", function (req, res) {
+    // db.FoodUsers.findAll({where:{userId:req.params.id}})
+    //   .then(function (result) {
+      //     res.json(result)
+      //   })
+      db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
+        user.getClinic({}).then(clinics => {
+          res.json(clinics);
+        });
+      });
+    });
+
+    app.delete("/api/deleteClinic/:userid/:clinicid",function(req,res){
+      console.log("hit hereeee")
+      db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
+        user.removeClinic(req.params.clinicid).then(clinic => {
+          res.json(clinic);
+        });
+      });
+    });
+  
   // saving user preferences to databse
   // app.post("/api/clinictouser", function (req, res) {
   //   db.Clinic.findOne({ where: { location: req.body.clinicData.location } }).then(function (clinic) {
@@ -159,6 +187,26 @@ module.exports = function (app) {
     })
   });
 
+  app.get("/api/userShelters/:id", function (req, res) {
+    // db.FoodUsers.findAll({where:{userId:req.params.id}})
+    //   .then(function (result) {
+      //     res.json(result)
+      //   })
+      db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
+        user.getShelter({}).then(shelters => {
+          res.json(shelters);
+        });
+      });
+    });
+
+    app.delete("/api/deleteShelter/:userid/:shelterid",function(req,res){
+      console.log("hit hereeee")
+      db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
+        user.removeShelter(req.params.shelterid).then(shelter => {
+          res.json(shelter);
+        });
+      });
+    });
   
 
 }

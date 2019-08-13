@@ -32,6 +32,11 @@ module.exports = function(sequelize, DataTypes) {
       as: 'shelter',
       foreignKey: 'userId'
     });
+    User.belongsToMany(models.Clinic, {
+      through: 'ClinicUsers',
+      as: 'clinic',
+      foreignKey: 'userId'
+    });
   };
 
  

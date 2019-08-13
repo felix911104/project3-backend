@@ -148,22 +148,6 @@ module.exports = function (app) {
         });
       });
     });
-  
-  // saving user preferences to databse
-  // app.post("/api/clinictouser", function (req, res) {
-  //   db.Clinic.findOne({ where: { location: req.body.clinicData.location } }).then(function (clinic) {
-  //     // console.log(req.body.userId)
-  //     db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
-  //       // console.log('adding foodz')
-  //       console.log("clinic to user")
-  //       user.addClinic(clinic);
-  //       res.send('data added');
-  //     })
-  //   })
-  // });
-
-
-
 
 
   app.get("/api/shelters", function (req, res) {
@@ -172,7 +156,6 @@ module.exports = function (app) {
         res.json(result);
       });
   });
-
 
 
   app.post("/api/Shelterstouser", function (req, res) {

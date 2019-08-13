@@ -117,7 +117,7 @@ module.exports = function (app) {
   });
 
   
-  app.post("/api/Clinicstouser", function (req, res) {
+  app.post("/api/clinictouser", function (req, res) {
     db.Clinic.findOne({ where: { Location: req.body.clinicData.Location } }).then(function (clinic) {
   console.log(clinic)
       db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
@@ -128,7 +128,7 @@ module.exports = function (app) {
     })
   });
 
-  app.get("/api/userClinics/:id", function (req, res) {
+  app.get("/api/userclinic/:id", function (req, res) {
     // db.FoodUsers.findAll({where:{userId:req.params.id}})
     //   .then(function (result) {
       //     res.json(result)

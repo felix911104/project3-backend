@@ -36,6 +36,14 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
+    Clinic.associate = (models) => {
+      Clinic.belongsToMany(models.User, {
+        through: 'ClinicUsers',
+        as: 'users',
+        foreignKey: 'clinicId'
+      });
+    };
+
     return Clinic;
   };
   

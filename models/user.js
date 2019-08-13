@@ -32,12 +32,12 @@ module.exports = function(sequelize, DataTypes) {
       as: 'shelter',
       foreignKey: 'userId'
     });
+    User.belongsToMany(models.Clinic, {
+      through: 'ClinicUsers',
+      as: 'clinic',
+      foreignKey: 'userId'
+    });
   };
-
- 
-
-
-
 
     User.beforeCreate(function(user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);

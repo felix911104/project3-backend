@@ -190,6 +190,201 @@ module.exports = function (app) {
         });
       });
     });
+  //seed heroku database
+    app.get("/api/seed", function(req, res) {
+      db.Clinic.create({
+        Name: "Downtown Public Health Center",
+        Location: "2124 4th Ave Seattle, WA 98121",
+        DaysOfOperation: "Monday - Friday 8:00 am - 5:00 pm",
+        PhoneNumber: "206-477-8300",
+        ClientsServed: "All age groups",
+        Services: "Adult health care clinic, opioid treatment with suboxone and buprenorphine, child health care clinic, children with special needs, dental clinic, maternity screening and support services, pregnancy testing, pharmacy, prenatal care, needle exchange.",
+        Notes: "Lots of services, please go to link below to learn more",
+        Link: "https://www.kingcounty.gov/depts/health/locations/downtown.aspx"
+    })
+    
+    db.Clinic.create({
+        Name: "RotaCare Free Clinic",
+        Location: "12726 33rd Ave NE Seattle, WA 98125",
+        DaysOfOperation: "Saturdays 10:00am - 1:00pm",
+        PhoneNumber: "N/A",
+        ClientsServed: "All age groups",
+        Services: "medical care",
+        Notes: "It is recommended to get to the clinic by 9:30 to sign in - registration is on a first come, first serve basis. Walk-in only. We are located on the 2nd floor above our partner, the North Helpline Food Bank.",
+        Link: "https://rotacareclinic.wordpress.com/"
+    });
+    
+    db.Clinic.create({
+        Name: "Puget Sound Christian Clinic",
+        Location: "8914 Aurora Avenue N Seattle, WA 98103",
+        DaysOfOperation: "Wednesday 11:00 am – 2:00 pm",
+        PhoneNumber: "206-363-4105 ext. 230",
+        ClientsServed: "All age groups",
+        Services: "Full medical exams,resources to obtain low to no cost prescription drugs, laboratory tests, imaging services, intensive nursing case management and referrals to medical specialists, individualized diabetic education, physical therapy, ophthalmology, cardiology and chiropractic care.",
+        Notes: "Walk-in only, Located at Aurora Commons",
+        Link: "https://pschristianclinic.org/services"
+    });
+    
+    db.Clinic.create({
+        Name: "Puget Sound Christian Clinic",
+        Location: "2152 N 122nd Street Seattle, WA 98133",
+        DaysOfOperation: "Monday 4:00 pm – 8:00 pm, Wednesday 5:00 pm. – 9:00 pm, Friday 9:00 am – 1:00 pm",
+        PhoneNumber: "206-363-4105 ext. 230",
+        ClientsServed: "All age groups",
+        Services: "Full medical exams,resources to obtain low to no cost prescription drugs, laboratory tests, imaging services, intensive nursing case management and referrals to medical specialists, individualized diabetic education, physical therapy, ophthalmology, cardiology and chiropractic care.",
+        Notes: "Walk-in and by-appointment, Located inside North Seattle Church",
+        Link: "https://pschristianclinic.org/services"
+    });
+    
+    db.Clinic.create({
+        Name: "Meridian Center for Health - Public Health Clinic/Neighborcare Clinic",
+        Location: "10521 Meridian Ave N 2nd Floor Seattle WA 98133",
+        DaysOfOperation: "Public Health Clinic: Monday, Wednesday, Friday 8:00 am - 5:00 pm Tuesday, Thursday 8:00 am - 6:30 pm || Neighborcare Clinic: Monday, Tuesday 8:00 am - 5:00 pm Wednesday 9:00 am - 5:00 pm Thursday 8:00 am - 7:00 pm Friday 8:00 am - 4:00 pm",
+        PhoneNumber: "Public Health Clinic: 206-263-9440 || Neighborcare Clinic: 206-296-4990",
+        ClientsServed: "All age groups",
+        Services: "Adult health care clinic, child health care clinic, behavioral health services, HIV screening, maternity services, substance abuse, WIC program info",
+        Notes: "",
+        Link: "https://www.kingcounty.gov/depts/health/locations/north.aspx"
+    });
+    
+    db.Clinic.create({
+        Name: "North Seattle Dental Clinic",
+        Location: "12359 Lake City Way NE Seattle, WA 98125",
+        DaysOfOperation: "Monday - Friday 8 am to 5 pm",
+        PhoneNumber: "206-205-8580",
+        ClientsServed: "Children ages 1 through 18 years old, Low income pregnant women,Homeless teens and adults (ages 13 and up), Parents of child patients if Medicaid eligible, Low income adults 19+ if Medicaid eligible",
+        Services: "dental services",
+        Notes:"",
+        Link: "https://www.kingcounty.gov/depts/health/locations/north/dental-clinic.aspx"
+    });
+    db.Clinic.create({
+        Name: "Neighborcare Health 45th Street MEDICAL",
+        Location: "1629 North 45th Street Seattle, WA 98103",
+        DaysOfOperation: "Monday, Tuesday 8:00 am - 7:00 pm Wednesday varies, Thursday, Friday 8:00 am - 5:30 pm Saturday 9:00 am - 3:00 pm",
+        PhoneNumber: "206-633-3113",
+        ClientsServed: "Low-income, homeless, all ages",
+        Services: "Preventive Care, Illnesses & Injuries, Ongoing Conditions, Well-child Care, Pediatrics, Family Planning, Family Medicine, Pregnancy Care, Newborn Care, Vaccinations, Nutrition, Counseling, STI/HIV, CareLab, Referrals, Pharmacy, Trans",
+        Notes:"Please schedule an appointment ahead of time and arrive 15 minutes early",
+        Link: "https://neighborcare.org/clinics/45th-street/"
+    });
+    db.Clinic.create({
+        Name: "Neighborcare Health 45th Street DENTAL CLINIC",
+        Location: "1629 North 45th Street Seattle, WA 98103",
+        DaysOfOperation: "Monday - Tuesday 7:00 am - 5:30 pm Saturday 9:00 am - 2:00 pm",
+        PhoneNumber: "206-548-2964",
+        ClientsServed: "Low-income, homeless, all ages",
+        Services: "Cleanings, Fillings, X-rays, Specialty Dental Care, Specialist Referrals, Emergency Dental Care",
+        Notes:"",
+        Link: "https://neighborcare.org/clinics/45th-street/"
+    });
+    db.Clinic.create({
+        Name: "Neighborcare Health 45th Street PHARMACY",
+        Location: "1629 North 45th Street Seattle, WA 98103",
+        DaysOfOperation: "Monday - Friday 9:00 am - 5:30 pm",
+        PhoneNumber: "206-633-3365",
+        ClientsServed: "Low-income, homeless, all ages",
+        Services: "Medication fills",
+        Notes:"",
+        Link: "https://neighborcare.org/clinics/45th-street/"
+    });
+    db.Shelter.create({
+      Name: "Roots Young Adults Shelter",
+      Location: "1415 NE 43rd Street Seattle, WA",
+      DaysOfOperation: "All days of the week",
+      PhoneNumber: "206-632-1635",
+      ClientsServed: " Young adults ages 18 - 25",
+      Services: "Safe overnight emergency shelter, Clean bedding, Dinner and breakfast, Showers, Clothing, Toiletries, On-site case management (Monday – Thursday) and referral to other support and transitional services, Supportive and nurturing relationships between staff, volunteers, and guests",
+      Notes: "The shelter is located in the basement of the University Temple United Methodist Church. The entrance is in the alley at the southwest corner of the building.  PLEASE CALL NUMBER ABOVE OR COME TO DOOR TO SIGN UP.",
+      Link: "https://www.kingcounty.gov/depts/health/locations/downtown.aspx"
+  })
   
+  db.Shelter.create({
+      Name: "Sacred Heart Shelter",
+      Location: "100 23rd Avenue S Seattle, WA",
+      DaysOfOperation: "All days of the week",
+      PhoneNumber: "206-285-7489",
+      ClientsServed: "All age groups",
+      Services: "Safe overnight shelter, Clean Bedding",
+      Notes: "",
+      Link: "https://ccsww.org/get-help/shelter-homeless-services/sacred-heart-shelter/"
+  });
+  
+  db.Shelter.create({
+      Name: "Mary's Place",
+      Location: "Many locations throughout Seattle, Check link to website below",
+      DaysOfOperation: "All days of the week",
+      PhoneNumber: "206-245-1026",
+      ClientsServed: "All age groups",
+      Services: "Muliple shelters throught Seattle for women, children, and families, womens day center, community resources, and many more programs to help with babies, employment, and housing.",
+      Notes: "Please call phone number above to get more information about services or visit link",
+      Link: "https://www.marysplaceseattle.org/"
+  });
+  
+  db.Shelter.create({
+      Name: "Seattle's Union Gosple Mission: Mens Shelter",
+      Location: "318 2nd Ave Ext S, Seattle, WA 98104",
+      DaysOfOperation: "All days of the week",
+      PhoneNumber: "206-622-5177",
+      ClientsServed: "Adult men",
+      Services: "Meals, Shelter, programs to assist in employment.",
+      Notes: "Visit link or call to get more information",
+      Link: "https://www.ugm.org/what-we-do/welcome-and-embrace/mens-shelter/"
+  });
+  
+  db.Shelter.create({
+      Name: "Bread of Life. The Mission in Pioneer Square",
+      Location: "97 S. MAIN STREET, SEATTLE, WA 98104",
+      DaysOfOperation: "All days of the week",
+      PhoneNumber: "206-682-3579",
+      ClientsServed: "Day Shelter Open to All, Night Shelter Available for Adult Men",
+      Services: "Lockers, showers and bus tickets, help with clothing needs and a quiet place to relax and rest.",
+      Notes: "Visit link or call to get more information",
+      Link: "https://www.breadoflifemission.org/"
+  });
+  
+  db.Shelter.create({
+      Name: "Angeline's Day Center",
+      Location: "2030 3rd Avenue Seattle, WA 98121",
+      DaysOfOperation: "All days of the week. 8AM - 8PM.",
+      PhoneNumber: "206.436.8650",
+      ClientsServed: "Adult Women. Overnight winter shelter is open to single adult women 18 and older.",
+      Services: "Transitional Housing, Rental/Utility Assistance, Permanent Housing, Emergency Shelter, Homeless Services, Childcare",
+      Notes: "Visit link or call to get more information",
+      Link: "https://www.ywcaworks.org/programs/angelines-day-center"
+  });
+  
+  db.Shelter.create({
+      Name: "Noel House Women's Referral Center",
+      Location: "2030 3rd Ave Seattle, WA 98101",
+      DaysOfOperation: "All days of the week. 6:00 – 9:00 p.m.",
+      PhoneNumber: "(206) 441-3210",
+      ClientsServed: "Women",
+      Services: "The Women's Referral Center refers 180 women nightly to 15 shelters in partnership with multiple service agencies. Evening meals and hygiene services are also available.",
+      Notes: "Visit link or call to get more information",
+      Link: "https://ccsww.org/get-help/shelter-homeless-services/noel-house-programs/"
+  });
+  
+  db.Shelter.create({
+      Name: "Catholic Community Services - Solanus Casey Center",
+      Location: "906 Columbia Street Seattle, WA 98104",
+      DaysOfOperation: "Monday through Thursday, from 1:00 p.m. to 4:00 p.m.",
+      PhoneNumber: "206-223-0907",
+      ClientsServed: "All Age Groups",
+      Services: "Walk-in hospitality and referral center that provides services to the unemployed, working poor, those living on the street, shelters, and transitional housing.",
+      Notes: "Visit link or call to get more information",
+      Link: "http://ccsww.convio.net"
+  });
+  
+  db.Shelter.create({
+      Name: "Family and Adult Service Center - Adult Center",
+      Location: "77 S Washington St. Seattle, WA 98104",
+      DaysOfOperation: "Monday through Thursday, from 1:00 p.m. to 4:00 p.m.",
+      PhoneNumber: "(206) 474-1000",
+      ClientsServed: "All Age Groups",
+      Services: "Showers - Food - Laundry facilties - Telephones - Mail services - Clothing ",
+      Notes: "Visit link or call to get more information",
+      Link: "http://www.compasshousingalliance.org"
+  });
+    })
 
 }

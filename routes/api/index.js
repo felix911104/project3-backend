@@ -122,19 +122,37 @@ module.exports = function (app) {
   });
 
   // saving user preferences to databse
-  // app.post("/api/clinictouser", function (req, res) {
-  //   db.Clinic.findOne({ where: { location: req.body.clinicData.location } }).then(function (clinic) {
-  //     // console.log(req.body.userId)
-  //     db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
-  //       // console.log('adding foodz')
-  //       console.log("clinic to user")
-  //       user.addClinic(clinic);
-  //       res.send('data added');
-  //     })
-  //   })
-  // });
+  app.post("/api/clinictouser", function (req, res) {
+    db.Clinic.findOne({ where: { location: req.body.clinicData.Location } }).then(function (clinic) {
+      // console.log(req.body.userId)
+      db.User.findOne({ where: { id: req.body.userId } }).then(function (user) {
+        // console.log('adding foodz')
+        console.log("clinic to user")
+        user.addClinic(clinic);
+        res.send('data added');
+      })
+    })
+  });
 
+  //displaying saved data to preferences page
+  app.get("/api/userclinic/:id", function (req, res) {
+  
+      db.User.findOne({ where: { id: req.params.id } }).then(function (user) {
+        user.getClinic({}).then(clinic => {
+          res.json(clinic)
+        })
+      })
+    })
 
+    //delete clinic from preferences page
+    app.delete("/api/deleteclinic/:userid/:clinicid",function(req,res){
+      // console.log("hit hereeee")
+      db.User.findOne({ where: { id: req.params.userid } }).then(function (user) {
+        user.removeClinic(req.params.clinicid).then(clinic => {
+          res.json(clinic);
+        });
+      });
+    });
 
 
 
@@ -144,7 +162,6 @@ module.exports = function (app) {
         res.json(result);
       });
   });
-
 
 
   app.post("/api/Shelterstouser", function (req, res) {

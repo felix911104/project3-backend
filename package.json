@@ -13,7 +13,7 @@
     "mysql2": "^1.6.5",
     "node": "^12.8.0",
     "routes": "^2.1.0",
-    "sequelize": "^5.12.3"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {},
   "scripts": {
